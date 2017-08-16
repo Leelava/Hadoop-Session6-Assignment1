@@ -1,0 +1,34 @@
+Hive commands and corresponding file/dir in HDFS
+================================================
+
+1.create DATABASE custom;
+
+Corresponding file or dir in HDFS
+==================================
+17/08/16 23:10:11 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+Found 4 items
+drwxr-xr-x   - acadgild supergroup          0 2015-11-25 15:25 /user/hive/warehouse/b1.db
+drwxr-xr-x   - acadgild supergroup          0 2017-08-16 23:02 /user/hive/warehouse/custom.db
+drwxr-xr-x   - acadgild supergroup          0 2015-11-05 13:14 /user/hive/warehouse/first
+drwxr-xr-x   - acadgild supergroup          0 2017-07-23 17:58 /user/hive/warehouse/test.db
+
+2.create table temperature_data (date STRING,zip_code INT,temperature INT) row format delimited fields terminated by ',' stored as textfile;
+
+Corresponding file or dir in HDFS
+==================================
+load data local inpath '/home/acadgild/Desktop/Datafiles/first.txt' into  TABLE temperature_data;
+17/08/16 23:12:05 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+Found 1 items
+drwxr-xr-x   - acadgild supergroup          0 2017-08-16 23:07 /user/hive/warehouse/custom.db/temperature_data
+
+
+3.load data local inpath '/home/acadgild/Desktop/Datafiles/first.txt' into  TABLE temperature_data;
+
+corresponding file or dir in HDFS
+==================================
+[acadgild@localhost Datafiles]$ hadoop fs -ls /user/hive/warehouse/custom.db/temperature_data
+17/08/16 23:13:34 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+Found 1 items
+-rw-r--r--   1 acadgild supergroup         64 2017-08-16 23:07 /user/hive/warehouse/custom.db/temperature_data/first.txt
+
+
